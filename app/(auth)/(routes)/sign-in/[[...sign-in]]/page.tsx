@@ -5,7 +5,7 @@ export default function SignInPage() {
     <div className="flex h-screen items-center justify-center">
       <SignIn
         appearance={{ variables: { colorPrimary: "#0f172a" } }}
-        afterSignInUrl="/pricing"
+        afterSignInUrl="/"
       />
     </div>
   );

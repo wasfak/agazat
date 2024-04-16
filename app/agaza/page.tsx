@@ -21,9 +21,15 @@ export default async function AgazaPage() {
   }
 
   return (
-    <main className="flex mt-10 justify-center min-h-screen gap-x-4">
-      <CustmButton user={user} />
-      <p>Current Status: {user.isVac ? "اجازة" : "موجود"}</p>
+    <main className="flex justify-center mt-10 h-[100px] bg-gray-100">
+      <div className="p-6 max-w-sm bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <div className="flex items-center space-x-4">
+          <CustmButton user={user} />
+          <p className="text-lg font-semibold text-gray-900 dark:text-white">
+            Current Status: {user.isVac ? "On Leave" : "Available"}
+          </p>
+        </div>
+      </div>
     </main>
   );
 }
