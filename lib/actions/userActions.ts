@@ -101,3 +101,38 @@ export async function deleteUser(clerkId: string) {
     console.log();
   }
 }
+
+export async function userVacation(clerkId: string) {
+  try {
+    const currentUser = await prisma.user.findUnique({
+      where: {
+        clerkId: clerkId,
+      },
+      select: {
+        isVac: true, // Only fetch the 'isVac' field
+      },
+    });
+
+    if (!currentUser) throw new Error("User not found");
+    if (typeof currentUser.isVac !== "boolean")
+      throw new Error("Invalid isVac status");
+
+    const updatedUser = await prisma.user.update({
+      where: {
+        clerkId: clerkId,
+      },
+      data: {
+        isVac: !currentUser.isVac,
+      },
+    });
+    revalidatePath("/");
+    if (!updatedUser) throw new Error("User update failed");
+
+    return {
+      success: true,
+      user: JSON.parse(JSON.stringify(updatedUser)),
+    };
+  } catch (error) {
+    console.log();
+  }
+}
